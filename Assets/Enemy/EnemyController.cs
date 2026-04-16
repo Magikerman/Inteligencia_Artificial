@@ -8,9 +8,13 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float rotSpeed;
     [SerializeField] private float speed;
 
+    private bool inRange;
+
     private Context context;
     private EnemyTree tree;
     private Rigidbody rb;
+
+    [SerializeField] private GameObject cannon;
 
     private Vector3 rotation = new Vector3(1,0,0);
 
@@ -29,12 +33,15 @@ public class EnemyController : MonoBehaviour
         {
             case state.idle:
                 rotation = Vector3.zero;
+                inRange = false;
                 break;
             case state.pursue:
                 rotation = SteeringBehaviour.GetRotation(transform, context.player);
+                inRange = true;
                 break;
             case state.range:
                 rotation = -SteeringBehaviour.GetRotation(transform, context.player);
+                inRange = true;
                 break;
         }
     }
@@ -42,13 +49,17 @@ public class EnemyController : MonoBehaviour
     private void FixedUpdate()
     {
         rotation.y = transform.forward.y;
-        if (rotation != Vector3.zero)
-            transform.forward = Vector3.Lerp(transform.forward, rotation, rotSpeed * Time.fixedDeltaTime);
-
         Vector3 dir = transform.forward;
         dir.y = 0;
+
         if (enemyState != state.idle)
+        {
+            transform.forward = Vector3.Lerp(transform.forward, rotation, rotSpeed * Time.fixedDeltaTime);
             rb.AddForce(dir * speed * Time.fixedDeltaTime, ForceMode.Impulse);
+
+            if (enemyState == state.pursue) cannon.transform.forward = rotation;
+            else cannon.transform.forward = -rotation;
+        }
     }
 
     public void ChangeToIdle()
