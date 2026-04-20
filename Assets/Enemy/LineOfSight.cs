@@ -21,7 +21,7 @@ public static class LineOfSight
 
     private static bool InSight(Transform self, Transform target, LayerMask layer)
     {
-        Vector3 dir = (target.position - self.position).normalized;
+        Vector3 dir = (target.position - self.position);
         return !Physics.Raycast(self.position, dir, dir.magnitude, layer);
     }
 }
