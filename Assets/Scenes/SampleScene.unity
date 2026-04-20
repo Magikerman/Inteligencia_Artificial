@@ -2413,6 +2413,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6405916548012625572, guid: 9dbaf097568d22f46a245f27c59b9ee9, type: 3}
+      propertyPath: m_Constraints
+      value: 84
+      objectReference: {fileID: 0}
     - target: {fileID: 6902611981171136437, guid: 9dbaf097568d22f46a245f27c59b9ee9, type: 3}
       propertyPath: scoreText
       value: 

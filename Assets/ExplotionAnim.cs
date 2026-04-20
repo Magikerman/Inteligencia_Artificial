@@ -9,19 +9,27 @@ public class ExplotionAnim : MonoBehaviour
 
     private Renderer expRenderer;
     [SerializeField] private Renderer inRenderer;
+    private Collider collider;
     private float alpha = 0.8f;
 
     private void Awake()
     {
         transform.localScale = new Vector3(0.001f, 0.001f, 0.001f);
         expRenderer = GetComponent<Renderer>();
+        collider = GetComponent<Collider>();
     }
 
     private void Update()
     {
         transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(finalSize, finalSize, finalSize), animSpeed * Time.deltaTime);
-        
-        if (transform.localScale.x > finalSize - 0.5f)alpha = Mathf.Lerp(alpha, 0, animSpeed * Time.deltaTime);
+
+        if (transform.localScale.x > finalSize - 0.5f)
+        {
+            alpha = Mathf.Lerp(alpha, 0, animSpeed * Time.deltaTime);
+            if (collider != null)
+                Destroy(collider);
+        }
+
         
         MaterialPropertyBlock mpb = new MaterialPropertyBlock();
 
