@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -28,6 +29,11 @@ public static class SteeringBehaviour
 
         return futurePos;
     }
+
+    /*public static Vector3 Wander(Transform self, )
+    {
+
+    }*/
 
     public static ThrowData GetPredictedPositionThrowData(Vector3 targetPosition, Vector3 startPosition, Rigidbody playerRb)
     {

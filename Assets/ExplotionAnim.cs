@@ -40,7 +40,7 @@ public class ExplotionAnim : MonoBehaviour
     {
         if (other.gameObject.layer == 6)
         {
-            Debug.Log("Hit");
+            other.gameObject.GetComponent<PlayerController>().Die();
         }
     }
 }
